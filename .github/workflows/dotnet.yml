@@ -23,13 +23,15 @@ jobs:
     - name: Restore dependencies (Event)
       run: dotnet restore
       working-directory: Event
+      
     - name: Restore dependencies (Event.Tests)
       run: dotnet restore
       working-directory: Event.Tests
+      
+    - name: Build (Event)
+      run: dotnet build --no-restore
+      working-directory: Event
+
     - name: Test (Event.Tests)
       run: dotnet test
-      working-directory: Event.Tests
-    - name: Build
-      run: dotnet build --no-restore
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
+      working-directory: Event.Tests   

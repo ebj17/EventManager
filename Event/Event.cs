@@ -29,5 +29,19 @@ namespace MyEvents
             }
             return false;
         }
+
+        public List<string> VIPs = new List<string>();
+        public void VIP_list(string name)
+        {
+            if(!VIPs.Contains(name))
+            {
+                VIPs.Add(name);
+            }
+            else
+            {
+                throw new ArgumentException("VIP attendee already exists");
+            }
+        }
+
     }
 }

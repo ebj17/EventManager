@@ -39,5 +39,41 @@ namespace MyEvents.Tests
             bool registrationResult = evnt.RegisterAttendee();
             Assert.False(registrationResult);
         }
+
+        [Fact]
+        public void Vertifying_VIPAttendance()
+        {
+        //Arrange
+        var evnt1 = new Event("Midget mathematical problems","Workshop", 4);
+        evnt1.VIP_list("Epstein");
+        //Since the Class program will belong to an instance of Event, we have to create a mock one
+
+        //Act
+        var actual = evnt1.VIPs; 
+        //Assert
+        Assert.Contains("Epstein", actual);
+        }
+
+        [Fact]
+        public void NoDuplicate_creation()
+        {
+            //Arrange
+            var evnt2 = new Event("Epstein didnt kill himself", "Fact", 10);
+
+            //Act
+            try
+            {
+            evnt2.VIP_list("Bruv");
+            evnt2.VIP_list("Bruv");
+            }
+
+            //Assert
+            catch (ArgumentException)
+            {
+                return; //test passed
+            }
+            Assert.True(false, "Expected Exception was not thrown");
+        }
+
     }
 }
